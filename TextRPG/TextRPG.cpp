@@ -2,27 +2,34 @@
 #include <iostream>
 #include <vector>
 #include "Inventory.h"
+#include "GameManager.h"
+#include "MapManager.h"
 
 int main()
 {
     //std::cout << "Hello World!\n";
 
-    Inventory inven;
-    inven.AddItem(ItemType::Weapon, GradeType::Common, 5);
-    inven.AddItem(ItemType::Leather, GradeType::Uncommon, 10);
-    inven.AddItem(ItemType::Wood, GradeType::Uncommon, 10);
+   // Inventory inven;
+   // inven.AddItem(ItemType::Weapon, GradeType::Common, 5);
+   // inven.AddItem(ItemType::Leather, GradeType::Uncommon, 10);
+   // inven.AddItem(ItemType::Wood, GradeType::Uncommon, 10);
  
 
-   // inven.SellItem(2);
+   //// inven.SellItem(2);
 
-    std::vector<Item> items;
-    items.push_back(Item(ItemType::Wood, GradeType::Uncommon, 10));
-    items.push_back(Item(ItemType::Leather, GradeType::Uncommon, 10));
+   // std::vector<Item> items;
+   // items.push_back(Item(ItemType::Wood, GradeType::Uncommon, 10));
+   // items.push_back(Item(ItemType::Leather, GradeType::Uncommon, 10));
 
-    if (inven.ConsumeIfEnough(items))
-        printf("재료 충분");
+   // if (inven.ConsumeIfEnough(items))
+   //     printf("재료 충분");
 
-    inven.ShowInventory();
+   // inven.ShowInventory();
+    auto& gameManger = GameManager::GetInstance();
+    
+    auto& mapManger = MapManager::GetInstance();
+    mapManger.ShowVillage();
+
 }
 
 //1. 캐릭터창 - 스탯 + 인벤토리
@@ -55,30 +62,53 @@ int main()
 
 //맵, UI 구조는 txt로 만들어놓고...
 
+//크기 40 * 18...
+
+//마을 : 파랑
+//신전 : 녹색
+//강화 : 주황
+//상점 : 노랑
+//인벤 : 흰색
+//벽   : 다크 그레이?
+//########################################
+//v                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//########################################
 
 // 
-//###################eee#############################################
-//#                #    #
-//#                #    
-//#                #
-//#    temple      #
-//#                #
-//#                #
-//#                #
-//#               t 
-//##################
-//#
-//#
-//#
-//#
-//#
-//#
-//#
-//#
-//#
-//#
-//#
-//#
+//
+//########################################
+//#             Village                  #
+//###################e####################
+//#                #   #                 # 
+//#                #   #                 #   
+//#    Temple      #   #     Enforce     #  
+//#                #   #                 #
+//#                t   f                 #  
+//##################   ###################
+//#                                      h
+//##################    ##################
+//#                s    I                #
+//#                #    #                # 
+//#      Shop      #    #     Storage    #
+//#                #    #                #
+//#                #    #                #
+//########################################
+
 
 //예시
 //신전 들어가면 맵 다 클리어하고
@@ -98,7 +128,7 @@ int main()
 //정보
 
 //***********************************
-//*           플레이어
+//*           강화
 //***********************************
 //*Name : %s
 //*STR : %d
@@ -127,7 +157,7 @@ int main()
 //#  5.
 //#  Gold : 100
 //#  
-//#
+//#  
 //#
 //#
 //#

@@ -6,6 +6,6 @@ void Player::OnHit(int Damage)
 	if (Health <= 0)
 	{
 		IsDead = true;
-		GameManager::PlayerDead();
+		GameManager::GetInstance().PlayerDead();
 	}
 }

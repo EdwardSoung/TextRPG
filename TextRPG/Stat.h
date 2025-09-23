@@ -14,10 +14,10 @@ private:
 	int Health = 0;
 };
 
-Stat operator+(const Stat& BaseStat, const Stat& ItemStat)
-{
-	int Attack = BaseStat.GetStat(StatType::Attack) + ItemStat.GetStat(StatType::Attack);
-	int Defence = BaseStat.GetStat(StatType::Attack) + ItemStat.GetStat(StatType::Attack);
-	int Health = BaseStat.GetStat(StatType::Attack) + ItemStat.GetStat(StatType::Attack);
-	return Stat(Attack, Defence, Health);
-}
+//Stat operator+(const Stat& BaseStat, const Stat& ItemStat)
+//{
+//	int Attack = BaseStat.GetStat(StatType::Attack) + ItemStat.GetStat(StatType::Attack);
+//	int Defence = BaseStat.GetStat(StatType::Attack) + ItemStat.GetStat(StatType::Attack);
+//	int Health = BaseStat.GetStat(StatType::Attack) + ItemStat.GetStat(StatType::Attack);
+//	return Stat(Attack, Defence, Health);
+//}

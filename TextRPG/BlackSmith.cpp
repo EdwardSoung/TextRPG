@@ -3,14 +3,14 @@
 
 bool BlackSmith::CraftWeapon(GradeType Grade)
 {
-    if (GameManager::_Inventory.IsFull())
+    if (GameManager::GetInstance()._Inventory->IsFull())
     {
         printf("Inventory is Full\n");
-        return;
+        return false;
     }
 
     auto materials = GetMaterials(ItemType::Weapon, Grade);
-    if (GameManager::_Inventory.ConsumeIfEnough(materials))
+    if (GameManager::GetInstance()._Inventory->ConsumeIfEnough(materials))
     {
         //만들어서 인벤토리 저장
         int random = rand() % 10000;
@@ -18,7 +18,7 @@ bool BlackSmith::CraftWeapon(GradeType Grade)
         if (random < 1000)
         {
             //10%
-            GameManager::_Inventory.AddItem(ItemType::Weapon, Grade, 1);
+            GameManager::GetInstance()._Inventory->AddItem(ItemType::Weapon, Grade, 1);
             return true;
         }
 
@@ -34,14 +34,14 @@ bool BlackSmith::CraftWeapon(GradeType Grade)
 
 bool BlackSmith::CraftArmor(GradeType Grade)
 {
-    if (GameManager::_Inventory.IsFull())
+    if (GameManager::GetInstance()._Inventory->IsFull())
     {
         printf("Inventory is Full\n");
-        return;
+        return false;
     }
 
     auto materials = GetMaterials(ItemType::Armor, Grade);
-    if (GameManager::_Inventory.ConsumeIfEnough(materials))
+    if (GameManager::GetInstance()._Inventory->ConsumeIfEnough(materials))
     {
         //만들어서 인벤토리 저장
         int random = rand() % 10000;
@@ -49,7 +49,7 @@ bool BlackSmith::CraftArmor(GradeType Grade)
         if (random < 1000)
         {
             //10%
-            GameManager::_Inventory.AddItem(ItemType::Armor, Grade, 1);
+            GameManager::GetInstance()._Inventory->AddItem(ItemType::Armor, Grade, 1);
             return true;
         }
 

@@ -1,12 +1,12 @@
 #include "GameManager.h"
 
+GameManager::~GameManager()
+{
+	delete _Inventory;
+}
+
 void GameManager::PlayerDead()
 {
+
 }
 
-void GameManager::ChaneMap(MapState State)
-{
-	//¸Â´Â ¸Ê Ç¥±â
-
-	CurrentMap = State;
-}
