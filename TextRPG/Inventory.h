@@ -1,6 +1,9 @@
 #pragma once
 #include <cstdio>
 #include <Windows.h>
+#include <vector>
+#include <iostream>
+#include <vector>
 #include "Item.h"
 
 //그냥 아이템 목록만 글자로 하자...
@@ -36,11 +39,16 @@ class Inventory
 public:
 	
 	void ShowInventory();
-	void AddItem(ItemType InType, GradeType InGrade);
+	void AddItem(ItemType InType, GradeType InGrade, int count);
 	void SellItem(int Index);
+	void Equip(int Index);
+	bool ConsumeIfEnough(std::vector<Item> Consumes);
+	bool IsFull();
 
 private:
+	void PrintInventory();
 	static constexpr int InventoryMax = 20;
-	Item Items[InventoryMax];
+	std::vector<Item> Items;
+	int Gold = 0;
 };
 

@@ -123,16 +123,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="BlackSmith.cpp" />
     <ClCompile Include="GameInfo.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Stat.cpp" />
     <ClCompile Include="TextRPG.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="BlackSmith.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Stat.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

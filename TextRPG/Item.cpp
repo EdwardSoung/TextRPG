@@ -3,6 +3,10 @@
 void Item::PrintItemString()
 {
     printf("%s(%s)", GetItemNameString().c_str(), GetGradeString().c_str());
+    if (IsMaterial())
+    {
+        printf(" x %d", Amount);
+    }
 }
 
 
@@ -42,6 +46,11 @@ std::string Item::GetGradeString()
     case GradeType::Legend:
         return "Àü¼³";
     }
+}
+
+bool Item::IsEnough(Item item)
+{
+    return Type == item.GetType() && Grade == item.GetGrade() && Amount >= item.GetAmount();
 }
 
 void Item::InitSellPrice()

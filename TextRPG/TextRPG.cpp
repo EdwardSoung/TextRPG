@@ -1,10 +1,28 @@
 ﻿
 #include <iostream>
+#include <vector>
+#include "Inventory.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    //std::cout << "Hello World!\n";
 
+    Inventory inven;
+    inven.AddItem(ItemType::Weapon, GradeType::Common, 5);
+    inven.AddItem(ItemType::Leather, GradeType::Uncommon, 10);
+    inven.AddItem(ItemType::Wood, GradeType::Uncommon, 10);
+ 
+
+   // inven.SellItem(2);
+
+    std::vector<Item> items;
+    items.push_back(Item(ItemType::Wood, GradeType::Uncommon, 10));
+    items.push_back(Item(ItemType::Leather, GradeType::Uncommon, 10));
+
+    if (inven.ConsumeIfEnough(items))
+        printf("재료 충분");
+
+    inven.ShowInventory();
 }
 
 //1. 캐릭터창 - 스탯 + 인벤토리
