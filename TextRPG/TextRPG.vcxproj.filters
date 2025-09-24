@@ -110,5 +110,8 @@
     <ClInclude Include="Stat.h">
       <Filter>헤더 파일\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>헤더 파일\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

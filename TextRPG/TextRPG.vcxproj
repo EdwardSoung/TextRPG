@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="BlackSmith.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Item.h" />

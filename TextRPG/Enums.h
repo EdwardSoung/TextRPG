@@ -112,6 +112,11 @@ enum class MapBlock
 
 	Village,
 	Pray,
+	WeaponEnforce,
+	ArmorEnforce,
+	ShopSell,
+	WeaponCraft,
+	ArmorCraft,
 
 	Field_Easy01,
 	Field_Easy02,

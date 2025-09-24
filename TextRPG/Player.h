@@ -17,6 +17,11 @@ public:
 	bool UnEquipWeapon();
 	bool UnEquipArmor();
 	void Heal();
+
+	inline bool WeaponExists() { return EquipWeapon.GetType() != ItemType::None; }
+	inline bool ArmorExists() { return EquipArmor.GetType() != ItemType::None; }
+	inline Item GetWeapon() { return EquipWeapon; }
+	inline Item GetArmor() { return EquipArmor; }
 	
 private:
 	Item EquipWeapon;

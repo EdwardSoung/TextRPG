@@ -2,6 +2,7 @@
 #include "Inventory.h"
 #include "Player.h"
 #include "Stat.h"
+#include "Constants.h"
 
 class Player;
 class Inventory;
