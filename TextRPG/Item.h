@@ -16,6 +16,7 @@ public:
 	std::string GetGradeString();
 	void AddAmount(int InAmount) { Amount += InAmount; }
 	bool IsEnough(Item item);
+	void Use(int InAmount);
 
 	inline bool IsMaterial() { return Type == ItemType::Wood || Type == ItemType::Leather || Type == ItemType::Mineral; }
 
@@ -23,6 +24,13 @@ public:
 	inline GradeType GetGrade() { return Grade; }
 	inline int GetSellPrice() { return SellPrice; }
 	inline int GetAmount() { return Amount; }
+	inline void Reset()
+	{
+		Amount = 0;
+		Type = ItemType::None;
+		Grade = GradeType::None;
+		SellPrice = 0;
+	}
 	
 	inline bool IsEquip()
 	{

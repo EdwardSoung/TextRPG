@@ -6,15 +6,19 @@
 class Player : public Actor
 {
 public:
-	Player() = default;
+	Player();
 	Player(Stat InBaseStat) : Actor(InBaseStat)
 	{
 		Health = BaseStat.GetStat(StatType::Health);
 	}
-	virtual void OnHit(int Damage);
+	virtual void OnHit(int Damage) override;
+
+	void Equip(Item Item);
+	bool UnEquipWeapon();
+	bool UnEquipArmor();
+	void Heal();
 	
 private:
-
 	Item EquipWeapon;
 	Item EquipArmor;
 };

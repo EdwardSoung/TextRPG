@@ -1,16 +1,15 @@
 #include "BlackSmith.h"
-#include "GameManager.h"
 
 bool BlackSmith::CraftWeapon(GradeType Grade)
 {
-    if (GameManager::GetInstance()._Inventory->IsFull())
+    if (GameManager::GetInstance().ItemInventory->IsFull())
     {
         printf("Inventory is Full\n");
         return false;
     }
 
     auto materials = GetMaterials(ItemType::Weapon, Grade);
-    if (GameManager::GetInstance()._Inventory->ConsumeIfEnough(materials))
+    if (GameManager::GetInstance().ItemInventory->ConsumeIfEnough(materials))
     {
         //만들어서 인벤토리 저장
         int random = rand() % 10000;
@@ -18,7 +17,7 @@ bool BlackSmith::CraftWeapon(GradeType Grade)
         if (random < 1000)
         {
             //10%
-            GameManager::GetInstance()._Inventory->AddItem(ItemType::Weapon, Grade, 1);
+            GameManager::GetInstance().ItemInventory->AddItem(ItemType::Weapon, Grade, 1);
             return true;
         }
 
@@ -34,14 +33,14 @@ bool BlackSmith::CraftWeapon(GradeType Grade)
 
 bool BlackSmith::CraftArmor(GradeType Grade)
 {
-    if (GameManager::GetInstance()._Inventory->IsFull())
+    if (GameManager::GetInstance().ItemInventory->IsFull())
     {
         printf("Inventory is Full\n");
         return false;
     }
 
     auto materials = GetMaterials(ItemType::Armor, Grade);
-    if (GameManager::GetInstance()._Inventory->ConsumeIfEnough(materials))
+    if (GameManager::GetInstance().ItemInventory->ConsumeIfEnough(materials))
     {
         //만들어서 인벤토리 저장
         int random = rand() % 10000;
@@ -49,7 +48,7 @@ bool BlackSmith::CraftArmor(GradeType Grade)
         if (random < 1000)
         {
             //10%
-            GameManager::GetInstance()._Inventory->AddItem(ItemType::Armor, Grade, 1);
+            GameManager::GetInstance().ItemInventory->AddItem(ItemType::Armor, Grade, 1);
             return true;
         }
 
@@ -76,5 +75,5 @@ std::vector<Item> BlackSmith::GetMaterials(ItemType Type, GradeType Grade)
 
     //무기이면 광물 + 나무
     //갑옷이면 광물 + 가죽
-    return std::vector<Item>();
+    return materials;
 }

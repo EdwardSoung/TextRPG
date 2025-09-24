@@ -1,5 +1,11 @@
 #include "Inventory.h"
 
+Inventory::Inventory()
+{
+	Gold = 0;
+	Items.clear();
+}
+
 void Inventory::ShowInventory()
 {
 	int InputChoice = 0;
@@ -61,10 +67,25 @@ void Inventory::ShowInventory()
 		}
 	}
 
+	//나감..
+	MapManager::GetInstance().ShowMap();
+
 }
 
 void Inventory::AddItem(ItemType InType, GradeType InGrade, int count)
 {
+	if (Items.empty())
+	{
+		Items.push_back(Item(InType, InGrade, count));
+		return;
+	}
+
+	if (InType == ItemType::Weapon || InType == ItemType::Armor)
+	{
+		Items.push_back(Item(InType, InGrade, count));
+		return;
+	}
+
 	auto Find = std::find_if(Items.begin(), Items.end(), [InType, InGrade](Item& data) { return data.GetType() == InType && data.GetGrade() == InGrade; });
 
 	if (Find == Items.end())
@@ -85,6 +106,11 @@ void Inventory::AddItem(ItemType InType, GradeType InGrade, int count)
 	}
 }
 
+void Inventory::AddItem(Item InItem)
+{
+
+}
+
 void Inventory::SellItem(int Index)
 {
 	auto Remove = Items.at(Index);
@@ -97,21 +123,71 @@ void Inventory::Equip(int Index)
 {
 	auto Equipment = Items[Index];
 
-	//플레이어에 장착 적용
-
 	Items.erase(Items.begin() + Index);
+
+	//플레이어에 장착 적용
+	GameManager::GetInstance().CurrentPlayer->Equip(Equipment);
+}
+
+void Inventory::UnEquip(ItemType InType)
+{
+	if (InType == ItemType::Weapon)
+	{
+		bool isSuccess = GameManager::GetInstance().CurrentPlayer->UnEquipWeapon();
+		if (isSuccess)
+			printf("장착 해제 성공!");
+		else
+			printf("인벤토리가 꽉 차서 해제 실패.");
+	}
+	else if(InType == ItemType::Armor)
+	{
+		bool isSuccess = GameManager::GetInstance().CurrentPlayer->UnEquipArmor();
+		if (isSuccess)
+			printf("장착 해제 성공!");
+		else
+			printf("인벤토리가 꽉 차서 해제 실패.");
+	}
+
+	printf("장비가 아닙니다.\n");
 }
 
 bool Inventory::ConsumeIfEnough(std::vector<Item> Consumes)
 {	
 	for (Item consume : Consumes)
 	{
-		auto Enough = std::find_if(Items.begin(), Items.end(), [consume](Item& findItem) {return findItem.IsEnough(consume); });
+		auto Enough = std::find_if(Items.begin(), Items.end(), 
+			[&consume](Item& findItem)
+			{
+				return findItem.IsEnough(consume); 
+			});
 		if (Enough == Items.end())
 		{
 			return false;
 		}
 	}
+
+	//소모
+	for (Item consume : Consumes)
+	{
+		if (consume.IsEquip())
+			continue;
+
+		auto found = std::find_if(Items.begin(), Items.end(),
+			[&consume](Item& Current)
+			{
+				return consume.GetType() == Current.GetType() && consume.GetGrade() == Current.GetGrade();
+			});
+
+		(*found).Use(consume.GetAmount());
+	}
+
+	auto Remove = std::remove_if(Items.begin(), Items.end(),
+		[](Item& Current)
+		{
+			return Current.GetAmount() == 0;
+		});
+
+	Items.erase(Remove, Items.end());
 
 	return true;
 }
@@ -121,7 +197,14 @@ bool Inventory::IsFull()
 	return Items.size() == InventoryMax;
 }
 
+bool Inventory::UseGold(int InGold)
+{
+	if (Gold < InGold)
+		return false;
 
+	Gold -= InGold;
+	return true;
+}
 void Inventory::PrintInventory()
 {
 	system("cls");

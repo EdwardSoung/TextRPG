@@ -4,6 +4,7 @@
 #include "Inventory.h"
 #include "GameManager.h"
 #include "MapManager.h"
+#include "BlackSmith.h"
 
 int main()
 {
@@ -25,11 +26,14 @@ int main()
    //     printf("재료 충분");
 
    // inven.ShowInventory();
-    auto& gameManger = GameManager::GetInstance();
+    auto& gameManager = GameManager::GetInstance();
+    gameManager.GetInstance().Init();
+    gameManager.GetInstance().ItemInventory->AddItem(ItemType::Mineral, GradeType::Common, 10);
+    gameManager.GetInstance().ItemInventory->AddItem(ItemType::Wood, GradeType::Common, 10);
     
     auto& mapManger = MapManager::GetInstance();
-    mapManger.ShowVillage();
-
+    
+    mapManger.ChangeMap(MapState::Village);
 }
 
 //1. 캐릭터창 - 스탯 + 인벤토리
@@ -108,8 +112,29 @@ int main()
 //#                #    #                #
 //#                #    #                #
 //########################################
-
-
+// 
+// 
+// 
+//########################################
+//#               Temple                 #
+//########################################
+//#                                      #
+//#      Lv.1  oooooooooo (100/100)      #
+//#                                      #
+//########################################
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      #
+//#                                      v
+//########################################
+//기도 : 10골드 내고 5% 확률로 체력 회복
 //예시
 //신전 들어가면 맵 다 클리어하고
 //****************

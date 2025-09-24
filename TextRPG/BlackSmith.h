@@ -3,6 +3,8 @@
 #include "Enums.h";
 #include "Item.h"
 #include "Inventory.h"
+#include "GameManager.h"
+
 class BlackSmith
 {
 	//¥Î¿Â∞£ 

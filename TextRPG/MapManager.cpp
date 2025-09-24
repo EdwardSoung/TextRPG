@@ -2,14 +2,12 @@
 
 void MapManager::ShowVillage()
 {
-	CurrentMap = MapState::Village;
-
 	for (int i = 0; i < MapHeight; i++)
 	{
 		for (int j = 0; j < MapWidth; j++)
 		{
 			if (i == PlayerPosition.Y && j == PlayerPosition.X)
-				printf("☆");
+				printf("＠");
 			else
 				GetMapString(VillageMap[i][j]);
 		}
@@ -17,6 +15,44 @@ void MapManager::ShowVillage()
 	}
 
 	ShowDirectionInfo();
+}
+
+void MapManager::ShowTemple()
+{
+	for (int i = 0; i < MapHeight; i++)
+	{
+		for (int j = 0; j < MapWidth; j++)
+		{
+			if (i == PlayerPosition.Y && j == PlayerPosition.X)
+				printf("＠");
+			else
+				GetMapString(TempleMap[i][j]);
+		}
+		printf("\n");
+	}
+	
+	if (TempleMap[PlayerPosition.Y][PlayerPosition.X] == static_cast<int>(MapBlock::Pray))
+	{
+		int Input = 0;
+
+		while (Input != 1)
+		{
+			printf("기도를 하시겠습니까?(비용 10G)\n");
+			printf("Yes : 1, No : 2");
+			std::cin >> Input;
+
+			if (Input == 1)
+			{
+				if (GameManager::GetInstance().ItemInventory->UseGold(10))
+				{
+					GameManager::GetInstance().Heal();
+				}
+			}
+		}
+
+	}
+	else
+		ShowDirectionInfo();
 }
 
 void MapManager::ShowDirectionInfo()
@@ -32,9 +68,8 @@ void MapManager::ShowDirectionInfo()
 	}
 	else if (Input == 'i')
 	{
-		//i면 맵 지우고 나가기면 다시 표기.. 현재가 맵 어딘지 보고...
 		system("cls");
-		GameManager::GetInstance()._Inventory->ShowInventory();
+		GameManager::GetInstance().ItemInventory->ShowInventory();
 	}
 	else if(Input == 'p')
 	{
@@ -45,40 +80,128 @@ void MapManager::ShowDirectionInfo()
 
 void MapManager::Move(char Input)
 {
+	Position Next;
 	if (Input == 'w' || Input == 'W')
 	{
-		Position Next(PlayerPosition.X, PlayerPosition.Y - 1);
-		if (CanMove(Next))
-		{
-			PlayerPosition = Next;
-			ShowVillage();
-		}
+		Next = Position(PlayerPosition.X, PlayerPosition.Y - 1);
 	}
+	else if (Input == 's' || Input == 'S')
+	{
+		Next = Position(PlayerPosition.X, PlayerPosition.Y + 1);
+	}
+	else if (Input == 'a' || Input == 'A')
+	{
+		Next = Position(PlayerPosition.X - 1, PlayerPosition.Y);
+	}
+	else if (Input == 'd' || Input == 'D')
+	{
+		Next = Position(PlayerPosition.X + 1, PlayerPosition.Y);		
+	}
+
+	if (CanMove(Next))
+	{
+		PlayerPosition = Next;
+	}
+
+	system("cls");
+	ShowMap();
 }
 
-void MapManager::ChangeMap(MapState State)
+bool MapManager::IsMapMove()
 {
+	auto CurrentBlock = GetCurrentMapBlock();
+	if (CurrentBlock == MapBlock::EmptyBlock || CurrentBlock >= MapBlock::MineralBlock)
+	{
+		return true;
+	}
+	return false;
+}
+
+MapBlock MapManager::GetCurrentMapBlock()
+{
+	int Block = 0;
+	switch (CurrentMap)
+	{
+	case MapState::Village:
+		Block = VillageMap[PlayerPosition.Y][PlayerPosition.X];
+		break;
+	}
+
+	return static_cast<MapBlock>(Block);
 }
 
 bool MapManager::CanMove(Position Next)
 {
 	int NextBlock = VillageMap[Next.Y][Next.X];
 
-	if (NextBlock == 0 || (NextBlock >= static_cast<int>(MapBlock::MineralBlock) && NextBlock < static_cast<int>(MapBlock::Player)))
+
+	if (NextBlock == 0 || (NextBlock >= static_cast<int>(MapBlock::MineralBlock) && NextBlock < static_cast<int>(MapBlock::FieldEnd)))
+	{
+		CheckAndChangeMap(NextBlock);
 		return true;
+	}
 
 	return false;
 }
 
-void MapManager::GetMapString(int block)
+void MapManager::CheckAndChangeMap(int Block)
 {
-	if (block >= static_cast<int>(MapBlock::A))
+	if (Block == 0) return;
+
+	MapBlock BlockItem = static_cast<MapBlock>(Block);
+	switch (BlockItem)
 	{
-		printf("%c", block);
+	case MapBlock::Shop:
+		ChangeMap(MapState::Shop);
+		break;
+	case MapBlock::Enforce:
+		ChangeMap(MapState::Enforce);
+		break;
+	case MapBlock::Temple:
+		ChangeMap(MapState::Temple);
+		break;
+	case MapBlock::BlackSmith:
+		ChangeMap(MapState::BlackSmith);
+		break;
+	case MapBlock::Field_Easy01:
+		ChangeMap(MapState::Field_Easy01);
+		break;
+	case MapBlock::Field_Easy02:
+		ChangeMap(MapState::Field_Easy02);
+		break;
+	case MapBlock::Field_Easy03:
+		ChangeMap(MapState::Field_Easy03);
+		break;
+	case MapBlock::Field_Hard01:
+		ChangeMap(MapState::Field_Hard01);
+		break;
+	case MapBlock::Field_Hard02:
+		ChangeMap(MapState::Field_Hard02);
+		break;
+	case MapBlock::Field_Hard03:
+		ChangeMap(MapState::Field_Hard03);
+		break;
+	case MapBlock::Village:
+		ChangeMap(MapState::Village);
+		break;
+	}
+}
+
+void MapManager::ChangeMap(MapState State)
+{
+	CurrentMap = State;
+	ShowMap();
+}
+
+void MapManager::GetMapString(int BlockNum)
+{
+	if (BlockNum >= static_cast<int>(MapBlock::A))
+	{
+		printf("%c", BlockNum);
 		return;
 	}
 
-	MapBlock Block = static_cast<MapBlock>(block);
+	MapBlock Block = static_cast<MapBlock>(BlockNum);
 
 	switch (Block)
 	{
@@ -118,9 +241,14 @@ void MapManager::GetMapString(int block)
 	case MapBlock::Cross:
 		printf("┼");
 		break;
-	case MapBlock::Player:
-		printf("☆");
+	case MapBlock::Pray:
+		SetBGColor(CC_BLUE);
+		printf(" ");
+		ResetBgColor();
 		break;
+	//case MapBlock::Player:
+	//	printf("☆");
+	//	break;
 	case MapBlock::Temple:
 		SetBGColor(CC_GREEN);
 		printf(" ");
@@ -141,19 +269,60 @@ void MapManager::GetMapString(int block)
 		printf(" ");
 		ResetBgColor();
 		break;
-	case MapBlock::Field:
+	case MapBlock::Field_Easy01:
 		SetBGColor(CC_RED);
+		printf(" ");
+		ResetBgColor();
+		break;
+	case MapBlock::Field_Easy02:
+		SetBGColor(CC_RED);
+		printf(" ");
+		ResetBgColor();
+		break;
+	case MapBlock::Field_Easy03:
+		SetBGColor(CC_RED);
+		printf(" ");
+		ResetBgColor();
+		break;
+	case MapBlock::Field_Hard01:
+		SetBGColor(CC_DARKRED);
+		printf(" ");
+		ResetBgColor();
+		break;
+	case MapBlock::Field_Hard02:
+		SetBGColor(CC_DARKRED);
+		printf(" ");
+		ResetBgColor();
+		break;
+	case MapBlock::Field_Hard03:
+		SetBGColor(CC_DARKRED);
 		printf(" ");
 		ResetBgColor();
 		break;
 	}
 }
 
-void MapManager::SetBGColor(int bgcolor)
+void MapManager::SetBGColor(int Bgcolor)
 {
-	int color = CC_ORIGINAL;
-	color &= 0xf;
-	bgcolor &= 0xf;
+	int Color = CC_ORIGINAL;
+	Color &= 0xf;
+	Bgcolor &= 0xf;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
-		(bgcolor << 4) | color);
+		(Bgcolor << 4) | Color);
 }
+
+
+
+void MapManager::ShowMap()
+{
+	switch (CurrentMap)
+	{
+	case MapState::Village:
+		ShowVillage();
+		break;
+	case MapState::Temple:
+		ShowTemple();
+		break;
+	}
+}
+

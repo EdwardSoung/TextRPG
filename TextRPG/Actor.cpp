@@ -1,5 +1,5 @@
 #include "Actor.h"
-#include "GameManager.h"
+#include "MapManager.h"
 
 void Actor::Attack(Actor& Target)
 {

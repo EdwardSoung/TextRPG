@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include "Item.h"
+#include "MapManager.h"
 
 //그냥 아이템 목록만 글자로 하자...
 //예시
@@ -37,13 +38,17 @@
 class Inventory
 {
 public:
+	Inventory();
 	
 	void ShowInventory();
 	void AddItem(ItemType InType, GradeType InGrade, int count);
+	void AddItem(Item InItem);
 	void SellItem(int Index);
 	void Equip(int Index);
+	void UnEquip(ItemType InType);
 	bool ConsumeIfEnough(std::vector<Item> Consumes);
 	bool IsFull();
+	bool UseGold(int InGold);
 
 private:
 	void PrintInventory();

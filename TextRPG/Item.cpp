@@ -53,6 +53,11 @@ bool Item::IsEnough(Item item)
     return Type == item.GetType() && Grade == item.GetGrade() && Amount >= item.GetAmount();
 }
 
+void Item::Use(int InAmount)
+{
+    Amount -= InAmount;
+}
+
 void Item::InitSellPrice()
 {
     switch (Grade)

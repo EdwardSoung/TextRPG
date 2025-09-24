@@ -50,6 +50,7 @@ enum class MapState
 	Village,	//건물 안들어간 마을 안
 	Shop,
 	BlackSmith,
+	Enforce,
 	Temple,
 
 	Field_Easy01 = 11,
@@ -110,8 +111,15 @@ enum class MapBlock
 	BlackSmith,
 
 	Village,
-	Field,
-	Player,
+	Pray,
+
+	Field_Easy01,
+	Field_Easy02,
+	Field_Easy03,
+	Field_Hard01,
+	Field_Hard02,
+	Field_Hard03,
+	FieldEnd,
 
 	A = 65,
 	B,
