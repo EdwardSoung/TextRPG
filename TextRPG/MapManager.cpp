@@ -4,6 +4,7 @@
 #include "EnforceMap.h"
 #include "ShopMap.h"
 #include "BlackSmithMap.h"
+#include "FieldMap.h"
 
 void MapManager::ChangeMap(MapState State)
 {
@@ -26,6 +27,11 @@ void MapManager::ChangeMap(MapState State)
 		break;
 	case MapState::Shop:
 		CurrentMapData = new ShopMap();
+		break;
+	case MapState::Field:
+		auto Field = new FieldMap();
+		Field->GenerateMaterials();
+		CurrentMapData = Field;
 		break;
 	}
 	CurrentMapData->ResetPosition(CurrentMap);

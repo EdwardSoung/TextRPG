@@ -41,7 +41,7 @@ public:
 	Inventory();
 	
 	void ShowInventory();
-	void AddItem(ItemType InType, GradeType InGrade, int count);
+	void AddItem(ItemType InType, GradeType InGrade, int count = 1);
 	void AddItem(Item* InItem);
 	bool SellItem(int Index, int Amount = 1);
 	void Equip(int Index);

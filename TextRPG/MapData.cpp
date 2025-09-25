@@ -142,32 +142,12 @@ void MapData::GetMapString(int BlockNum)
 		printf(" ");
 		ResetBgColor();
 		break;
-	case MapBlock::Field_Easy01:
+	case MapBlock::EnterField:
 		SetBGColor(CC_RED);
 		printf(" ");
 		ResetBgColor();
 		break;
-	case MapBlock::Field_Easy02:
-		SetBGColor(CC_RED);
-		printf(" ");
-		ResetBgColor();
-		break;
-	case MapBlock::Field_Easy03:
-		SetBGColor(CC_RED);
-		printf(" ");
-		ResetBgColor();
-		break;
-	case MapBlock::Field_Hard01:
-		SetBGColor(CC_DARKRED);
-		printf(" ");
-		ResetBgColor();
-		break;
-	case MapBlock::Field_Hard02:
-		SetBGColor(CC_DARKRED);
-		printf(" ");
-		ResetBgColor();
-		break;
-	case MapBlock::Field_Hard03:
+	case MapBlock::NextField:
 		SetBGColor(CC_DARKRED);
 		printf(" ");
 		ResetBgColor();

@@ -1,5 +1,6 @@
 #pragma once
 
+
 struct Position
 {
 	int X = 0;
@@ -54,13 +55,7 @@ enum class MapState
 	Enforce,
 	Temple,
 
-	Field_Easy01 = 11,
-	Field_Easy02,
-	Field_Easy03,
-
-	Field_Hard01 = 21,
-	Field_Hard02,
-	Field_Hard03,
+	Field = 11,
 
 };
 
@@ -119,12 +114,8 @@ enum class MapBlock
 	WeaponCraft,
 	ArmorCraft,
 
-	Field_Easy01,
-	Field_Easy02,
-	Field_Easy03,
-	Field_Hard01,
-	Field_Hard02,
-	Field_Hard03,
+	EnterField,
+	NextField,
 	FieldEnd,
 
 	A = 65,
@@ -180,4 +171,15 @@ enum class MapBlock
 	x,
 	y,
 	z
+};
+
+struct MaterialBlock
+{
+	Position Pos;
+	MapBlock Block;
+	MaterialBlock() = default;
+	MaterialBlock(Position InPos, MapBlock InBlock) : Pos(InPos), Block(InBlock)
+	{
+
+	}
 };

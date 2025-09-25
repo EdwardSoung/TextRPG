@@ -106,10 +106,10 @@ void Inventory::AddItem(ItemType InType, GradeType InGrade, int count)
 	}
 	else
 	{
-		auto item = (*Find);
-		if (item.IsMaterial())
+		auto item = &(*Find);
+		if (item->IsMaterial())
 		{
-			item.AddAmount(count);
+			item->AddAmount(count);
 		}
 		else
 		{

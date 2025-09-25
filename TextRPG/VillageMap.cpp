@@ -46,9 +46,9 @@ void VillageMap::ResetPosition(MapState PrevMap)
 		TargetMapBlock = MapBlock::BlackSmith;
 		Offset = Position(-1, 0);
 	}
-	else if (PrevMap == MapState::Field_Easy01)
+	else if (PrevMap == MapState::Field)
 	{
-		TargetMapBlock = MapBlock::Field_Easy01;
+		TargetMapBlock = MapBlock::EnterField;
 		Offset = Position(-1, 0);
 	}
 
@@ -124,8 +124,8 @@ MapState VillageMap::BlockToMap(MapBlock InBlock)
 		return MapState::Shop;		
 	case MapBlock::BlackSmith:
 		return MapState::BlackSmith;		
-	case MapBlock::Field_Easy01:
-		return MapState::Field_Easy01;		
+	case MapBlock::EnterField:
+		return MapState::Field;		
 	default:
 		return MapState::Village;
 	}
