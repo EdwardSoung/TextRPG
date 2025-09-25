@@ -1,6 +1,7 @@
 #pragma once
 #include "Inventory.h"
 #include "Player.h"
+#include "Monster.h"
 #include "Stat.h"
 #include "Constants.h"
 
@@ -14,7 +15,10 @@ public:
 		static GameManager Instance;
 		return Instance;
 	}
+	GameManager();
+	~GameManager();
 
+	Monster* CurrentMonster = nullptr;
 	Inventory* ItemInventory = nullptr;
 	Player* CurrentPlayer = nullptr;
 
@@ -23,14 +27,14 @@ public:
 	bool UseGold(int Gold);
 	void Heal();
 
-	GameManager();
+	void MonsterDead();
+	void CreateMonster();
 
 private:
 	GameManager(const GameManager&) = delete;
 	GameManager& operator=(const GameManager&) = delete;
 	GameManager(GameManager&&) = delete;
 	GameManager& operator=(GameManager&&) = delete;
-
-	~GameManager();
+	
 };
 

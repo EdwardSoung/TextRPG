@@ -1,10 +1,11 @@
 ﻿
 #include <iostream>
+#include <Windows.h>
 #include <vector>
 #include "Inventory.h"
 #include "GameManager.h"
 #include "MapManager.h"
-#include "BlackSmith.h"
+#include "BlackSmithMap.h"
 
 int main()
 {
@@ -30,10 +31,14 @@ int main()
     gameManager.GetInstance().Init();
     gameManager.GetInstance().ItemInventory->AddItem(ItemType::Mineral, GradeType::Common, 10);
     gameManager.GetInstance().ItemInventory->AddItem(ItemType::Wood, GradeType::Common, 10);
+    Weapon* TempWeapon = new Weapon(GradeType::Common);
+    gameManager.GetInstance().ItemInventory->AddItem(TempWeapon);
     
     auto& mapManger = MapManager::GetInstance();
     
     mapManger.ChangeMap(MapState::Village);
+
+    delete TempWeapon;
 }
 
 //1. 캐릭터창 - 스탯 + 인벤토리

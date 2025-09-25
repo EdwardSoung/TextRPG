@@ -1,9 +1,9 @@
 #include "Player.h"
 
-Player::Player()
+Player::~Player()
 {
-	EquipWeapon.Reset();
-	EquipArmor.Reset();
+	delete EquipWeapon;
+	delete EquipArmor;
 }
 
 void Player::OnHit(int Damage)
@@ -21,23 +21,25 @@ void Player::Heal()
 	Health = BaseStat.GetStat(StatType::Health);
 }
 
-void Player::Equip(Item Item)
+void Player::Equip(Item InItem)
 {
-	if (Item.GetType() == ItemType::Weapon && EquipWeapon.GetType() != ItemType::None)
+	if (InItem.GetType() == ItemType::Weapon && EquipWeapon != nullptr)
 	{
 		GameManager::GetInstance().ItemInventory->AddItem(EquipWeapon);
-		EquipWeapon.Reset();
+		delete EquipWeapon;
+		EquipWeapon = nullptr;
 	}
-	else if (Item.GetType() == ItemType::Armor && EquipArmor.GetType() != ItemType::None)
+	else if (InItem.GetType() == ItemType::Armor && EquipArmor != nullptr)
 	{
 		GameManager::GetInstance().ItemInventory->AddItem(EquipArmor);
-		EquipArmor.Reset();
+		delete EquipArmor;
+		EquipArmor = nullptr;
 	}
-
-	if (Item.GetType() == ItemType::Weapon)
-		EquipWeapon = Item;
-	else if (Item.GetType() == ItemType::Armor)
-		EquipArmor = Item;
+	//스탯값 안변하게 주소를 저장
+	if (InItem.GetType() == ItemType::Weapon)
+		EquipWeapon = static_cast<Weapon*>(&InItem);
+	else if (InItem.GetType() == ItemType::Armor)
+		EquipArmor = static_cast<Armor*>(&InItem);
 }
 
 bool Player::UnEquipWeapon()

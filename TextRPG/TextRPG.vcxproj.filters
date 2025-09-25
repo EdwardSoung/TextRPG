@@ -19,17 +19,11 @@
     <Filter Include="소스 파일\Character">
       <UniqueIdentifier>{3b3d9099-fcf8-4734-bd3b-728d64b424ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Building">
-      <UniqueIdentifier>{48cbd210-a6d6-4942-8c28-6b583a3afbf1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Items">
       <UniqueIdentifier>{e69690b7-ade6-4507-b67b-678c31b6b2e2}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\Enity">
       <UniqueIdentifier>{3e6c3ca9-f985-4bbd-8044-754e35bbae3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Building">
-      <UniqueIdentifier>{de00309b-d681-4db6-8027-f0b560ef8ec1}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\Character">
       <UniqueIdentifier>{e5508807-dfd4-430e-9ebf-7f0996043cf1}</UniqueIdentifier>
@@ -42,6 +36,12 @@
     </Filter>
     <Filter Include="헤더 파일\Entity">
       <UniqueIdentifier>{43b544dd-f7c6-4a64-aa5e-80d41c8709b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Map">
+      <UniqueIdentifier>{48cbd210-a6d6-4942-8c28-6b583a3afbf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Map">
+      <UniqueIdentifier>{de00309b-d681-4db6-8027-f0b560ef8ec1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,8 +63,8 @@
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\Character</Filter>
     </ClCompile>
-    <ClCompile Include="BlackSmith.cpp">
-      <Filter>소스 파일\Building</Filter>
+    <ClCompile Include="BlackSmithMap.cpp">
+      <Filter>소스 파일\Map</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>소스 파일\Items</Filter>
@@ -78,6 +78,30 @@
     <ClCompile Include="Item.cpp">
       <Filter>소스 파일\Enity</Filter>
     </ClCompile>
+    <ClCompile Include="EnforceMap.cpp">
+      <Filter>소스 파일\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapData.cpp">
+      <Filter>소스 파일\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopMap.cpp">
+      <Filter>소스 파일\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="TempleMap.cpp">
+      <Filter>소스 파일\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="VillageMap.cpp">
+      <Filter>소스 파일\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldMap.cpp">
+      <Filter>소스 파일\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor.cpp">
+      <Filter>소스 파일\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enums.h">
@@ -89,8 +113,8 @@
     <ClInclude Include="Player.h">
       <Filter>헤더 파일\Character</Filter>
     </ClInclude>
-    <ClInclude Include="BlackSmith.h">
-      <Filter>헤더 파일\Building</Filter>
+    <ClInclude Include="BlackSmithMap.h">
+      <Filter>헤더 파일\Map</Filter>
     </ClInclude>
     <ClInclude Include="MapManager.h">
       <Filter>헤더 파일\Manager</Filter>
@@ -112,6 +136,30 @@
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>헤더 파일\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EnforceMap.h">
+      <Filter>헤더 파일\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapData.h">
+      <Filter>헤더 파일\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopMap.h">
+      <Filter>헤더 파일\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TempleMap.h">
+      <Filter>헤더 파일\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="VillageMap.h">
+      <Filter>헤더 파일\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldMap.h">
+      <Filter>헤더 파일\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor.h">
+      <Filter>헤더 파일\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

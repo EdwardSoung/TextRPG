@@ -1,19 +1,19 @@
 #pragma once
 #include "Item.h"
-#include "Stat.h"
 class Weapon : public Item
 {
 public:
-	Weapon(ItemType InType, GradeType InGradeType, int InAmount) : Item(InType, InGradeType, 1) 
+	Weapon(GradeType InGradeType) : Item(ItemType::Weapon, InGradeType, 1) 
 	{
 		InitRandomStat();
 	}
-	virtual void PrintItemString();
 
+	int GetEnforcePrice();
+	int GetEnforceRate();
+	void RandomEnforce();
 
 private:
-	Stat StatData;
-
+	int GetStatRangeValue();
 	void InitRandomStat();
 };
 

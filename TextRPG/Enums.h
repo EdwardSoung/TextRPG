@@ -47,6 +47,7 @@ enum class GradeType
 
 enum class MapState
 {
+	None,
 	Village,	//건물 안들어간 마을 안
 	Shop,
 	BlackSmith,

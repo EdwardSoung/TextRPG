@@ -2,29 +2,32 @@
 #include "Actor.h"
 #include "Item.h"
 #include "GameManager.h"
+#include "Weapon.h"
+#include "Armor.h"
 
 class Player : public Actor
 {
 public:
-	Player();
+	Player() = default;
 	Player(Stat InBaseStat) : Actor(InBaseStat)
 	{
 		Health = BaseStat.GetStat(StatType::Health);
 	}
+	virtual ~Player();
 	virtual void OnHit(int Damage) override;
 
-	void Equip(Item Item);
+	void Equip(Item InItem);
 	bool UnEquipWeapon();
 	bool UnEquipArmor();
 	void Heal();
 
-	inline bool WeaponExists() { return EquipWeapon.GetType() != ItemType::None; }
-	inline bool ArmorExists() { return EquipArmor.GetType() != ItemType::None; }
-	inline Item GetWeapon() { return EquipWeapon; }
-	inline Item GetArmor() { return EquipArmor; }
+	inline bool WeaponExists() { return EquipWeapon != nullptr; }
+	inline bool ArmorExists() { return EquipArmor != nullptr; }
+	inline Weapon* GetWeapon() { return EquipWeapon; }
+	inline Armor* GetArmor() { return EquipArmor; }
 	
 private:
-	Item EquipWeapon;
-	Item EquipArmor;
+	Weapon* EquipWeapon = nullptr;
+	Armor* EquipArmor = nullptr;
 };
 

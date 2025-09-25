@@ -7,7 +7,7 @@ public:
 	Stat() = default;
 	Stat(int InAttack, int InDefence, int InHealth) : Attack(InAttack), Defence(InDefence), Health(InHealth) {}
 	int GetStat(StatType Type) const;
-	
+	void AddStat(StatType Type, int AddValue);
 private:
 	int Attack = 0;
 	int Defence = 0;

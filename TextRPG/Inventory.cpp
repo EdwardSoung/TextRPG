@@ -2,7 +2,7 @@
 
 Inventory::Inventory()
 {
-	Gold = 0;
+	//Gold = 0;
 	Items.clear();
 }
 
@@ -10,13 +10,16 @@ void Inventory::ShowInventory()
 {
 	int InputChoice = 0;
 	PrintInventory();
-	while (InputChoice <= 0)
+	while (InputChoice >= 0)
 	{
-		if (InputChoice <= 0)
+		if (InputChoice == 0)
 		{
-			printf("아이템 선택 : ");
+			printf("아이템 선택 (나가기 -1) : ");
 			std::cin >> InputChoice;
-			if (InputChoice < 1 || InputChoice > Items.size())
+			if (InputChoice < 0)
+				continue;
+
+			if (InputChoice > Items.size())
 			{
 				InputChoice = 0;
 				PrintInventory();
@@ -26,7 +29,7 @@ void Inventory::ShowInventory()
 			int Selection = 0;
 			if(Items[InputChoice - 1].IsMaterial())
 			{
-				printf("[1 정보] : ");
+				printf("선택 [1 정보] : ");
 				std::cin >> Selection;
 
 				if (Selection != 1)
@@ -38,18 +41,27 @@ void Inventory::ShowInventory()
 				else
 				{
 					//정보..
-					printf("%d번 아이템 정보 : \n", InputChoice);
+					printf("%d번 아이템 정보\n", InputChoice);
+					Items[InputChoice - 1].PrintItemInfoString();
 					InputChoice = 0;
 				}
 			}
 			else
 			{
-				printf("[1 정보, 2 장착] : ");
+				printf("선택 [1 정보, 2 장착] : ");
 				std::cin >> Selection;
 
 				if (Selection == 1)
 				{
-					printf("%d번 아이템 정보 : \n", InputChoice);
+					printf("%d번 아이템 정보\n", InputChoice);
+					Items[InputChoice - 1].PrintItemInfoString();
+					printf("-------------------------\n");
+					Items[InputChoice - 1].PrintItemString();
+					printf("\n");
+					printf("공격력 : %d\n", Items[InputChoice - 1].GetStatValue(StatType::Attack));
+					printf("방어력 : %d\n", Items[InputChoice - 1].GetStatValue(StatType::Defence));
+					printf("체력   : %d\n", Items[InputChoice - 1].GetStatValue(StatType::Health));
+					printf("-------------------------\n");
 					InputChoice = 0;
 				}
 				else if (Selection == 2)
@@ -106,17 +118,27 @@ void Inventory::AddItem(ItemType InType, GradeType InGrade, int count)
 	}
 }
 
-void Inventory::AddItem(Item InItem)
+void Inventory::AddItem(Item* InItem)
 {
-
+	Items.push_back(*InItem);
 }
 
-void Inventory::SellItem(int Index)
+bool Inventory::SellItem(int Index, int Amount)
 {
-	auto Remove = Items.at(Index);
-	Gold += Remove.GetSellPrice();
+	if (Index > Items.size())
+	{
+		printf("잘못된 인벤토리 아이템입니다.\n");
+		return false;
+	}
+	auto Remove = &Items[Index - 1];
+	int SoldGold = Remove->GetSellPrice() * Amount;
+	Remove->AddAmount(-Amount);
+	Gold += SoldGold;
 
-	Items.erase(Items.begin() + Index);
+	if(Remove->GetAmount() <= 0)
+		Items.erase(Items.begin() + (Index - 1));
+
+	return true;
 }
 
 void Inventory::Equip(int Index)
@@ -127,6 +149,7 @@ void Inventory::Equip(int Index)
 
 	//플레이어에 장착 적용
 	GameManager::GetInstance().CurrentPlayer->Equip(Equipment);
+	ShowInventory();
 }
 
 void Inventory::UnEquip(ItemType InType)

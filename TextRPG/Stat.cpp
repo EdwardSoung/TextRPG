@@ -15,3 +15,18 @@ int Stat::GetStat(StatType Type) const
 	}
 	return 0;
 }
+
+void Stat::AddStat(StatType Type, int AddValue)
+{
+	switch (Type)
+	{
+	default:
+		return;
+	case StatType::Attack:
+		Attack += AddValue;
+	case StatType::Defence:
+		Defence += AddValue;
+	case StatType::Health:
+		Health += AddValue;
+	}
+}

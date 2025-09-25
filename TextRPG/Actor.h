@@ -6,6 +6,7 @@ class Actor
 public:
 	Actor() = default;
 	Actor(Stat InBaseStat) :BaseStat(InBaseStat) {}
+	virtual ~Actor() {}
 	void Attack(Actor& Target);
 	virtual void OnHit(int Damage) = 0;
 protected:

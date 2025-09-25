@@ -124,28 +124,44 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="BlackSmith.cpp" />
+    <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="BlackSmithMap.cpp" />
+    <ClCompile Include="EnforceMap.cpp" />
+    <ClCompile Include="FieldMap.cpp" />
     <ClCompile Include="GameInfo.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="MapData.cpp" />
     <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ShopMap.cpp" />
     <ClCompile Include="Stat.cpp" />
+    <ClCompile Include="TempleMap.cpp" />
     <ClCompile Include="TextRPG.cpp" />
+    <ClCompile Include="VillageMap.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="BlackSmith.h" />
+    <ClInclude Include="Armor.h" />
+    <ClInclude Include="BlackSmithMap.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="EnforceMap.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="FieldMap.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="MapData.h" />
     <ClInclude Include="MapManager.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ShopMap.h" />
     <ClInclude Include="Stat.h" />
+    <ClInclude Include="TempleMap.h" />
+    <ClInclude Include="VillageMap.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

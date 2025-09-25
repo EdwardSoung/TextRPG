@@ -42,18 +42,22 @@ public:
 	
 	void ShowInventory();
 	void AddItem(ItemType InType, GradeType InGrade, int count);
-	void AddItem(Item InItem);
-	void SellItem(int Index);
+	void AddItem(Item* InItem);
+	bool SellItem(int Index, int Amount = 1);
 	void Equip(int Index);
 	void UnEquip(ItemType InType);
 	bool ConsumeIfEnough(std::vector<Item> Consumes);
 	bool IsFull();
 	bool UseGold(int InGold);
 
+	inline const int GetSize() { return Items.size(); }
+	inline const std::vector<Item> GetItems() { return Items; }
+	inline const int GetGold() { return Gold; }
+
 private:
 	void PrintInventory();
 	static constexpr int InventoryMax = 20;
 	std::vector<Item> Items;
-	int Gold = 0;
+	int Gold = 10000;
 };
 
