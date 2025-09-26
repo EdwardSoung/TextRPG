@@ -9,6 +9,31 @@
 - [코드 설명](#-코드-설명)<br>
 
 ---
+### 로비
+> 게임 시작화면
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/708f6361-9499-4e8c-85f2-17153d24d802" />
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/2c8c1006-2489-4fc3-85b0-03be0c69f82e" />
+<br>
+- 위(w), 아래(s) 키로 메뉴 선택 가능
+<br>
+<br>
+**게임 종료 선택 후 엔터 입력 시**
+<br>
+<br>
+<img width="451" height="468" alt="image" src="https://github.com/user-attachments/assets/3f11b1fb-3618-46bc-9a03-62aab7cfaadc" />
+<br>
+- 프로그램 종료
+<br>
+<br>
+**게임 시작 선택 후 엔터 입력 시**
+<br>
+<img width="380" height="400" alt="image" src="https://github.com/user-attachments/assets/8854f16e-f7f3-4ce6-98b5-e52119de28db" />
+<br>
+- 플레이어 이름 입력
+<br>
+<img width="380" height="302" alt="image" src="https://github.com/user-attachments/assets/0ee775d4-f236-4ad2-9e3c-3d5bf9d93165" />
+<br>
+
 ### 게임 설명
   1. **기본 키 입력**
      - 방향 : w(위) , s(아래), a(왼쪽), d(오른쪽)
