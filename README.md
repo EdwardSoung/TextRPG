@@ -66,12 +66,17 @@
 
 ### 사냥터 정보
 - 난이도는 등급과 동일하게 올라가며, 난이도에 해당하는 등급의 재료가 랜덤 드랍된다.(4개)
+<img width="365" height="420" alt="재료 획득" src="https://github.com/user-attachments/assets/9035a442-314f-4aa0-9635-b504d4b89e22" />
+<br>
 - 이동 시 10% 확률로 몬스터와 마주치고, 전투가 진행된다.
 
 ### 캐릭터의 사망
 - 사망 시 마을로 자동 이동한다.
 - 사망 시 인벤토리 아이템 중 하나를 개수와 상관없이 **"무조건"** 드랍한다.
 - 아이템이 없을 시 드랍하지 않는다.
+<br>
+<img width="393" height="204" alt="플레이어 사망" src="https://github.com/user-attachments/assets/34f96f87-c716-4fdf-8277-f4991a5f88bc" />
+<br>
 <br>
 
 # 코드 설명
