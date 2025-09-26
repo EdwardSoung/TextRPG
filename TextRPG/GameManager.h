@@ -7,6 +7,7 @@
 #include "Monster.h"
 #include "Stat.h"
 #include "Constants.h"
+#include "MapManager.h"
 
 class Player;
 class Inventory;
@@ -18,14 +19,13 @@ public:
 		static GameManager Instance;
 		return Instance;
 	}
-	GameManager();
+	GameManager() = default;
 	~GameManager();
 
 	Monster* CurrentMonster = nullptr;
 	Inventory* ItemInventory = nullptr;
 	Player* CurrentPlayer = nullptr;
 
-	void Init();
 	void PlayerDead();
 	bool UseGold(int Gold);
 	void Heal();
@@ -33,12 +33,15 @@ public:
 	void MonsterDead();
 	void BattleStart(int FieldLevel);
 
+	void PlayNewGame(std::string PlayerName);
+
 private:
 	GameManager(const GameManager&) = delete;
 	GameManager& operator=(const GameManager&) = delete;
 	GameManager(GameManager&&) = delete;
 	GameManager& operator=(GameManager&&) = delete;
 	
+	void Init(std::string InPlayerName);
 	void CreateMonster(int FieldLevel);
 	Stat GetMonsterStat(int FieldLevel);
 	std::string GetMonsterGradeString(GradeType InGrade);

@@ -1,9 +1,5 @@
 #include "GameManager.h"
 
-GameManager::GameManager()
-{
-	Init();
-}
 GameManager::~GameManager()
 {
 	delete CurrentPlayer;
@@ -11,9 +7,9 @@ GameManager::~GameManager()
 	delete CurrentMonster;
 }
 
-void GameManager::Init()
+void GameManager::Init(std::string InPlayerName)
 {
-	CurrentPlayer = new Player("플레이어", Stat(50, 20, 300));
+	CurrentPlayer = new Player(InPlayerName, Stat(50, 20, 300));
 	ItemInventory = new Inventory();
 }
 
@@ -85,7 +81,25 @@ void GameManager::BattleStart(int FieldLevel)
 	printf("계속 하려면 아무키나 누르세요\n");	
 	(void)_getch();
 
-}	
+}
+void GameManager::PlayNewGame(std::string PlayerName)
+{
+	if (PlayerName.empty())
+		PlayerName = "플레이어";
+
+	Init(PlayerName);
+
+	//기본 아이템 지급
+	ItemInventory->AddItem(ItemType::Mineral, GradeType::Common, 10);
+	ItemInventory->AddItem(ItemType::Wood, GradeType::Common, 10);
+	Weapon* TempWeapon = new Weapon(GradeType::Common);
+	ItemInventory->AddItem(TempWeapon);
+
+	delete TempWeapon;
+
+	MapManager::GetInstance().ChangeMap(MapState::Village);
+}
+
 
 void GameManager::CreateMonster(int FieldLevel)
 {
