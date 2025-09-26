@@ -20,6 +20,10 @@ void FieldMap::ShowMap()
 					//재료 컬러 아이템 표기
 					PrintMapMaterial(j, i);
 				}
+				else if (Level == LevelMax && Map[i][j] == static_cast<int>(MapBlock::NextField))
+				{
+					GetMapString(static_cast<int>(MapBlock::Vertial));
+				}
 				else
 					GetMapString(Map[i][j]);
 			}
@@ -77,15 +81,16 @@ void FieldMap::Move(char Input)
 	{
 		Next.X++;
 	}
-
-	if (CanMove(GetMapBlock(Next)))
+	
+	int NextBlock = GetMapBlock(Next);
+	if (CanMove(NextBlock))
 	{
 		MapManager::GetInstance().UpdatePosition(Next);
 
 		//현재위치 아이템 체크
 		CheckMaterialBlock(Next);
 
-		CheckPosAndChangeMap(GetMapBlock(Next));
+		CheckPosAndChangeMap(NextBlock);
 
 		if (GetCurrentMapBlock() == MapBlock::EmptyBlock)
 		{
@@ -133,13 +138,14 @@ void FieldMap::CheckPosAndChangeMap(int InBlock)
 
 void FieldMap::GenerateMaterials()
 {
+	MaterialGenPos.clear();
+
 	int HeightRandom = 0;
 	int WidthRandom = 0;
 	//우선 고정 4개 생성으로
 	int GenCount = 4;
 	int Generated = 0;
 
-	//음...타입도 저장해야하는데...
 	while (Generated < GenCount)
 	{
 		HeightRandom = rand() % (MapHeight - 5) + 4;
