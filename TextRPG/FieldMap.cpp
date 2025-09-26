@@ -116,6 +116,7 @@ void FieldMap::CheckPosAndChangeMap(int InBlock)
 	{
 		//다음 필드
 		Level++;
+		GenerateMaterials();
 		ResetPosition(MapState::Field);
 		system("cls");
 		ShowMap();
@@ -124,6 +125,7 @@ void FieldMap::CheckPosAndChangeMap(int InBlock)
 	{
 		//이전 필드
 		Level--;
+		GenerateMaterials();
 		ResetPositionToPrev();
 		system("cls");
 		ShowMap();

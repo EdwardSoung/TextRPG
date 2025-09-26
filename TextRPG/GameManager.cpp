@@ -19,16 +19,23 @@ void GameManager::Init()
 
 void GameManager::PlayerDead()
 {
+	printf("\n");
+	printf("플레이어가 사망했습니다\n");
+	printf("전투에서 패배하여 랜덤으로 아이템이 사라집니다.\n\n");
+
+	std::cin.clear();
+	while (_kbhit()) {  // 키가 남아 있다면
+		(void)_getch();       // 하나씩 읽어서 버림
+	}
+	printf("계속 하려면 아무키나 누르세요\n");
+	(void)_getch();
+
 	// 인벤토리 아이템 중 하나 제거
 	// 아이템이 없으면 제거안됨.
-	printf("플레이어가 사망했습니다\n");
-	printf("전투에서 패배하여 랜덤으로 아이템이 사라집니다.\n");
+	system("cls");
+
+	ItemInventory->RemoveRandom();	
 	
-	ItemInventory->RemoveRandom();
-	
-	printf("아무키나 누르면 마을로 이동합니다.\n");
-	(void)_getch();
-	//마을 기본 좌표로 이동함
 	MapManager::GetInstance().ResetMap();
 	MapManager::GetInstance().ChangeMap(MapState::Village);
 
@@ -38,7 +45,7 @@ void GameManager::PlayerDead()
 void GameManager::MonsterDead()
 {
 	//전투중인 몬스터 사망
-	printf("몬스터가 사망했습니다\n");
+	printf("\n");
 	printf("전투에서 승리했습니다.\n");
 
 	delete CurrentMonster;
@@ -71,10 +78,14 @@ void GameManager::BattleStart(int FieldLevel)
 		printf("\n");
 	}
 
-	printf("계속 하려면 아무키나 누르세요\n");
+	std::cin.clear();
+	while (_kbhit()) {  // 키가 남아 있다면
+		(void)_getch();       // 하나씩 읽어서 버림
+	}
+	printf("계속 하려면 아무키나 누르세요\n");	
 	(void)_getch();
 
-}
+}	
 
 void GameManager::CreateMonster(int FieldLevel)
 {
