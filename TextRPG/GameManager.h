@@ -1,4 +1,7 @@
 #pragma once
+#include <Windows.h>
+#include <string>
+#include <conio.h>
 #include "Inventory.h"
 #include "Player.h"
 #include "Monster.h"
@@ -28,7 +31,7 @@ public:
 	void Heal();
 
 	void MonsterDead();
-	void CreateMonster();
+	void BattleStart(int FieldLevel);
 
 private:
 	GameManager(const GameManager&) = delete;
@@ -36,5 +39,9 @@ private:
 	GameManager(GameManager&&) = delete;
 	GameManager& operator=(GameManager&&) = delete;
 	
+	void CreateMonster(int FieldLevel);
+	Stat GetMonsterStat(int FieldLevel);
+	std::string GetMonsterGradeString(GradeType InGrade);
+	std::string GetMonsterName(int FieldLevel);
 };
 

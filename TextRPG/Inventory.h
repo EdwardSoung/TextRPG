@@ -49,6 +49,7 @@ public:
 	bool ConsumeIfEnough(std::vector<Item> Consumes);
 	bool IsFull();
 	bool UseGold(int InGold);
+	void RemoveRandom();
 
 	inline const int GetSize() { return Items.size(); }
 	inline const std::vector<Item> GetItems() { return Items; }
@@ -58,6 +59,6 @@ private:
 	void PrintInventory();
 	static constexpr int InventoryMax = 20;
 	std::vector<Item> Items;
-	int Gold = 10000;
+	int Gold = 100;
 };
 

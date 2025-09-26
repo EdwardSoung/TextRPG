@@ -80,8 +80,8 @@ void Inventory::ShowInventory()
 	}
 
 	//나감..
+	system("cls");
 	MapManager::GetInstance().ShowMap();
-
 }
 
 void Inventory::AddItem(ItemType InType, GradeType InGrade, int count)
@@ -227,6 +227,19 @@ bool Inventory::UseGold(int InGold)
 
 	Gold -= InGold;
 	return true;
+}
+void Inventory::RemoveRandom()
+{
+	if (Items.size() == 0)
+	{
+		printf("인벤토리에 아이템이 존재하지 않아 잃어버린 아이템이 없습니다.\n");
+		return;
+	}
+
+	int ItemRandom = rand() % Items.size();
+
+	printf("아이템 [%s(%s)] 잃었습니다.\n", Items[ItemRandom].GetItemNameString().c_str(), Items[ItemRandom].GetGradeString().c_str());
+	Items.erase(Items.begin() + ItemRandom);
 }
 void Inventory::PrintInventory()
 {

@@ -30,3 +30,17 @@ void Stat::AddStat(StatType Type, int AddValue)
 		Health += AddValue;
 	}
 }
+
+void Stat::AddStat(Stat InStat)
+{
+	Attack += InStat.GetStat(StatType::Attack);
+	Defence += InStat.GetStat(StatType::Defence);
+	Health += InStat.GetStat(StatType::Health);
+}
+
+void Stat::SubStat(Stat InStat)
+{
+	Attack -= InStat.GetStat(StatType::Attack);
+	Defence -= InStat.GetStat(StatType::Defence);
+	Health -= InStat.GetStat(StatType::Health);
+}

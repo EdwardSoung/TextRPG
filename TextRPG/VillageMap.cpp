@@ -21,8 +21,12 @@ void VillageMap::ShowMap()
 //다른맵에서 여기로 올 때...
 void VillageMap::ResetPosition(MapState PrevMap)
 {
+	//맵 초기화 상태
 	if (PrevMap == MapState::None)
+	{
+		MapManager::GetInstance().UpdatePosition(19, 8);
 		return;
+	}
 
 	MapBlock TargetMapBlock = MapBlock::EmptyBlock;
 	Position Offset(0, 0);

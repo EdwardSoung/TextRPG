@@ -5,10 +5,10 @@ class Monster : public Actor
 {
 public:
 	Monster() = default;
-	Monster(Stat InBaseStat) : Actor(InBaseStat)
+	Monster(std::string InName, Stat InBaseStat) : Actor(InName, InBaseStat)
 	{
-		Health = BaseStat.GetStat(StatType::Health);
+		Health = GetTotalStat(StatType::Health);
 	}
 	virtual ~Monster() = default;
-	virtual void OnHit(int Damage) override;
+	virtual void OnHit(int InDamage) override;
 };

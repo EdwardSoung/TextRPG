@@ -1,4 +1,5 @@
 #include "MapData.h"
+#include "PlayerInfo.h"
 
 void MapData::ShowDirectionInfo()
 {
@@ -18,7 +19,9 @@ void MapData::ShowDirectionInfo()
 	}
 	else if (Input == 'p')
 	{
-		//캐릭터 정보..
+		system("cls");
+		PlayerInfo PlayerInfoUI;
+		PlayerInfoUI.ShowInfo();
 	}
 }
 
@@ -94,9 +97,6 @@ void MapData::GetMapString(int BlockNum)
 		printf(" ");
 		ResetBgColor();
 		break;
-		//case MapBlock::Player:
-		//	printf("☆");
-		//	break;
 	case MapBlock::Temple:
 		SetBGColor(CC_GREEN);
 		printf(" ");

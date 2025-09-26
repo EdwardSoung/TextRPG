@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+#include <string>
 
 struct PriceData
 {
@@ -34,19 +36,33 @@ public:
 	static const int EnforceRare		= 3000;
 	static const int EnforceUnique		= 2000;
 	static const int EnforceLegend		= 1000;
+	
 	static const int CraftCommon		= 7000;
 	static const int CraftUncommon		= 5000;
 	static const int CraftRare			= 3000;
 	static const int CraftUnique		= 2000;
 	static const int CraftrLegend		= 1000;
+
+	static const int BattleEncountRate	= 1000;
 };
 
 struct RangeData
 {
 public:
+	//강화 시 등급별 스탯 최대 증가치
 	static const int EnForceCommon		= 10;
 	static const int EnforceUncommon	= 15;
 	static const int EnforceRare		= 20;
 	static const int EnforceUnique		= 25;
 	static const int EnforceLegend		= 30;
+
+	static const int MonsterAttackBase = 25;
+	static const int MonsterDefenceBase = 30;
+	static const int MonsterHealthBase = 100;
+	
+};
+
+static const std::vector<std::string> MonsterNames =
+{
+	"Goblin", "Kobold", "GNoll", "Ghoul", "Orc", "Ogre", "Troll"
 };

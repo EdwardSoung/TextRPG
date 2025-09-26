@@ -42,6 +42,8 @@ public:
 
 		return StatData.GetStat(InType);
 	}
+
+	inline const Stat GetStat() { return StatData; }
 protected:
 	int Amount = 0;
 	int SellPrice = 0;

@@ -22,6 +22,8 @@ public:
 	Position PlayerPosition = Position(19, 8);
 	void UpdatePosition(Position InPos);
 	void UpdatePosition(int InPosX, int InPosY);
+
+	inline void ResetMap() { CurrentMap = MapState::None; }
 	
 	inline const MapState GetCurrentMap() { return CurrentMap; }
 private:

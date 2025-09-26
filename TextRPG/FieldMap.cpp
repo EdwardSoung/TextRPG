@@ -2,34 +2,40 @@
 
 void FieldMap::ShowMap()
 {
-	auto PlayerPos = MapManager::GetInstance().PlayerPosition;
-	for (int i = 0; i < MapHeight; i++)
-	{
-		for (int j = 0; j < MapWidth; j++)
-		{
-			if (i == PlayerPos.Y && j == PlayerPos.X)
-			{
-				printf("@");
-			}
-			else if (IsMaterialPos(j, i))
-			{
-				//재료 컬러 아이템 표기
-				PrintMapMaterial(j, i);
-			}
-			else
-				GetMapString(Map[i][j]);
-		}
-		printf("\n");
-	}
-	printf("#####난이도 : %d\n", Level);
+	Position PlayerPos;
 
-	if (GotItem != ItemType::None)
+	while (ExitMap == false)
 	{
-		printf("아이템 %s를 획득했습니다!\n", GetItemString(GotItem).c_str());
-		GotItem = ItemType::None;
+		PlayerPos = MapManager::GetInstance().PlayerPosition;
+		for (int i = 0; i < MapHeight; i++)
+		{
+			for (int j = 0; j < MapWidth; j++)
+			{
+				if (i == PlayerPos.Y && j == PlayerPos.X)
+				{
+					printf("@");
+				}
+				else if (IsMaterialPos(j, i))
+				{
+					//재료 컬러 아이템 표기
+					PrintMapMaterial(j, i);
+				}
+				else
+					GetMapString(Map[i][j]);
+			}
+			printf("\n");
+		}
+		printf("#####난이도 : %d\n", Level);
+
+		if (GotItem != ItemType::None)
+		{
+			printf("아이템 %s를 획득했습니다!\n", GetItemString(GotItem).c_str());
+			GotItem = ItemType::None;
+		}
+		ShowDirectionInfo();
 	}
-	ShowDirectionInfo();
-	//이동 후 몬스터 만남(확률)
+	 
+
 }
 
 void FieldMap::ResetPosition(MapState PrevMap)
@@ -78,11 +84,21 @@ void FieldMap::Move(char Input)
 
 		//현재위치 아이템 체크
 		CheckMaterialBlock(Next);
+
 		CheckPosAndChangeMap(GetMapBlock(Next));
+
+		if (GetCurrentMapBlock() == MapBlock::EmptyBlock)
+		{
+			int BattleRand = rand() % 10000;
+			if (BattleRand < RateData::BattleEncountRate)
+			{
+				GameManager::GetInstance().BattleStart(Level);
+			}
+		}
 	}
 
 	system("cls");
-	ShowMap();
+	//ShowMap();
 }
 
 void FieldMap::CheckPosAndChangeMap(int InBlock)
@@ -103,11 +119,13 @@ void FieldMap::CheckPosAndChangeMap(int InBlock)
 	{
 		//이전 필드
 		Level--;
+		ResetPositionToPrev();
 		system("cls");
 		ShowMap();
 	}
 	else if (BlockItem == MapBlock::EnterField && Level == 1)
 	{
+		ExitMap = true;
 		system("cls");
 		MapManager::GetInstance().ChangeMap(MapState::Village);
 	}
@@ -206,11 +224,11 @@ void FieldMap::CheckMaterialBlock(Position InPos)
 		break;
 	}
 
-	std::remove_if(MaterialGenPos.begin(), MaterialGenPos.end(),
+	MaterialGenPos.erase(std::remove_if(MaterialGenPos.begin(), MaterialGenPos.end(),
 		[InPos](MaterialBlock& BlockData)
 		{
 			return BlockData.Pos.X == InPos.X && BlockData.Pos.Y == InPos.Y;
-		});
+		}), MaterialGenPos.end());
 }
 
 std::string FieldMap::GetItemString(ItemType InType)
@@ -229,5 +247,20 @@ std::string FieldMap::GetItemString(ItemType InType)
 		return "가죽";
 	case ItemType::Wood:
 		return "나무";
+	}
+}
+
+void FieldMap::ResetPositionToPrev()
+{
+	for (int i = 0; i < MapHeight; i++)
+	{
+		for (int j = 0; j < MapWidth; j++)
+		{
+			if (Map[i][j] == static_cast<int>(MapBlock::NextField))
+			{
+				MapManager::GetInstance().UpdatePosition(j - 1, i);
+				return;
+			}
+		}
 	}
 }

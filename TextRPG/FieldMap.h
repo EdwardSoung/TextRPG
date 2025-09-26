@@ -26,6 +26,7 @@ private:
 	int Level = 1;	//≥≠¿Ãµµ..
 	const int LevelMax = 5;
 	ItemType GotItem = ItemType::None;
+	bool ExitMap = false;
 
 	std::vector<MaterialBlock> MaterialGenPos;
 
@@ -44,6 +45,7 @@ private:
 	void PrintMapMaterial(int InX, int InY);
 	void CheckMaterialBlock(Position InPos);
 	std::string GetItemString(ItemType InType);
+	void ResetPositionToPrev();
 
 	const int Map[MapHeight][MapWidth] =
 	{

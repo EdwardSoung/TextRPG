@@ -136,6 +136,7 @@
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerInfo.cpp" />
     <ClCompile Include="ShopMap.cpp" />
     <ClCompile Include="Stat.cpp" />
     <ClCompile Include="TempleMap.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerInfo.h" />
     <ClInclude Include="ShopMap.h" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="TempleMap.h" />
