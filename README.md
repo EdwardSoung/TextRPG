@@ -38,12 +38,12 @@
      - 아이템 인덱스로 선택 후 정보 확인 가능
      - 장비 아이템의 경우 장착 가능(장착 장비 존재 시 Swap)
      - 재료는 동일 등급 중복 보유 가능. 장비는 중복보유 불가
-        <br>
-        <img width="394" height="344" alt="인벤토리" src="https://github.com/user-attachments/assets/7b163813-01a4-425a-93a6-ebba40159504" />
       <br>
-    **6) 캐릭터 정보** : 캐릭터 이름, 스탯과 장착한 장비 정보를 보여준다.
-        <br>
-        <img width="387" height="339" alt="플레이어 정보" src="https://github.com/user-attachments/assets/a468342c-3573-4ef0-b011-8147bb63a2a1" />
+      <img width="394" height="344" alt="인벤토리" src="https://github.com/user-attachments/assets/7b163813-01a4-425a-93a6-ebba40159504" />
+      <br><br>
+      **6) 캐릭터 정보** : 캐릭터 이름, 스탯과 장착한 장비 정보를 보여준다.
+      <br>
+      <img width="387" height="339" alt="플레이어 정보" src="https://github.com/user-attachments/assets/a468342c-3573-4ef0-b011-8147bb63a2a1" />
       <br>
 
 ### 등급
